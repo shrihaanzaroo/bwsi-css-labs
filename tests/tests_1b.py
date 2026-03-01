@@ -5,10 +5,18 @@ This module contains unit tests for the simple_calculator function defined in la
 """
 
 import pytest
+import sys
+from pathlib import Path
+
+# Allow direct execution of this test file from the repository root or IDE.
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from labs.lab_1.lab_1b import simple_calculator
 
 def test_addition():
-    assert simple_calculator("add", 5, 3) == 8          # Test for positive numbers
+    assert simple_calculator("add", 5, 3) == 8        # Test for positive numbers
     assert simple_calculator("add", -2, 2) == 0         # Test for negative and positive number
     assert simple_calculator("add", 0, 0) == 0          # Test for zero addition
 
@@ -38,4 +46,4 @@ def test_invalid_operation():
         simple_calculator("", 5, 3)                     # Test for empty operation
 
 if __name__ == "__main__":
-    pytest.main()
+    pytest.main([__file__])
